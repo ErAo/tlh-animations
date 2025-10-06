@@ -1,5 +1,5 @@
 export default class Helpers {
-    static easing =  {
+    easing = {
         linear: (t) => t,
         easeIn: (t) => t * t,
         easeOut: (t) => t * (2 - t),
@@ -16,9 +16,46 @@ export default class Helpers {
             }
         }
     }
+
+    getElementPosition(element) {
+        if (typeof element === 'string') {
+            element = document.querySelector(element);
+        }
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+    }
+
+    scrollTo (position, duration = 500, easing = 'linear') {
+        const start = window.scrollY || window.pageYOffset;
+        const getPosition = typeof position === 'number' ? position : this.getElementPosition(position).top;
+        const change = getPosition - start;
+        let startTime = null;
+
+        if (duration <= 0) {
+            window.scrollTo(0, getPosition);
+            return;
+        }
+
+        const animateScroll = (currentTime) => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            const val = this.easing[easing](progress) * change + start;
+            window.scrollTo(0, val);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animateScroll);
+            }
+        };
+        
+        requestAnimationFrame(animateScroll);
+    }
     
     // Selector helper
-    static selector = (target) => {
+    selector = (target) => {
         if (typeof target === 'string') {
             return document.querySelectorAll(target);
         }
