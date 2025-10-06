@@ -5,17 +5,21 @@
   "main": "dist/tlh-animations.cjs.js",
   "module": "dist/tlh-animations.es.js",
   "unpkg": "dist/tlh-animations.umd.js",
+  "jsdelivr": "dist/tlh-animations.umd.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/tlh-animations.es.js",
-      "require": "./dist/tlh-animations.cjs.js"
+      "require": "./dist/tlh-animations.cjs.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
     "dist",
-    "src",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
+  "sideEffects": false,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -35,8 +39,20 @@
     "javascript",
     "library"
   ],
-  "author": "Richar Arenas",
+  "author": {
+    "name": "Richar Arenas",
+    "email": "emyerbetharenas@gmail.com",
+    "url": "https://github.com/ErAo"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErAo/tlh-animations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ErAo/tlh-animations/issues"
+  },
+  "homepage": "https://github.com/ErAo/tlh-animations#readme",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
