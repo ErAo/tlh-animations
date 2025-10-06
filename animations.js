@@ -507,6 +507,8 @@ class TLH {
   constructor () {
     this.instances = {};
 
+    this.helpers = new Helpers();
+
     this.setEvents()
   }
 
@@ -565,6 +567,8 @@ class TLH {
       console.warn(`Instance with name "${name}" already exists. Skipping creation. Please set a valid name on props.`);
       return;
     }
+
+    props.helpers = this.helpers;
 
     const instance = new TLHAnimation(container, props);
     this.addInstance(instance, name);
